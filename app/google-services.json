@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "3925603993",
+    "firebase_url": "https://nearbuy-8ca83.firebaseio.com",
+    "project_id": "nearbuy-8ca83",
+    "storage_bucket": "nearbuy-8ca83.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:3925603993:android:95fbca7cb05d268c",
+        "android_client_info": {
+          "package_name": "com.example.user.nearbuy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "3925603993-q827mhg96oosgq30ruvlq0aujfj7nc8b.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.user.nearbuy",
+            "certificate_hash": "9ea8140ea7754cbb3dd6d5ce0ec75e3687b8d6be"
+          }
+        },
+        {
+          "client_id": "3925603993-lfrhrkg1id0j5ibob9jpl7t6p3l8afoc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAsFT2JF7klUOZ0NTUa_cEiijSIhWc3XNs"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "3925603993-lfrhrkg1id0j5ibob9jpl7t6p3l8afoc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
