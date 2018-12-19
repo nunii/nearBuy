@@ -1,4 +1,4 @@
-package com.example.user.nearbuy;
+package com.example.user.nearbuy.Activities;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -8,9 +8,10 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.example.user.nearbuy.Classes.Customer;
+import com.example.user.nearbuy.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -18,10 +19,11 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class registerActivity extends AppCompatActivity  {
 
-    private EditText inputEmail, inputPassword;
+    private EditText inputEmail, inputPassword, inputName;
     private Button btn_register;
     //private ProgressBar progBar;
     private FirebaseAuth auth;
+    private Customer customer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +34,7 @@ public class registerActivity extends AppCompatActivity  {
 
         inputEmail = findViewById(R.id.text_email);
         inputPassword = findViewById(R.id.text_pw);
+        inputName = findViewById(R.id.text_nickname);
         btn_register = findViewById(R.id.btn_register2);
 
         btn_register.setOnClickListener(new View.OnClickListener() {
@@ -45,8 +48,9 @@ public class registerActivity extends AppCompatActivity  {
             @Override
             public void onClick(View v) {
 
-                String email = inputEmail.getText().toString().trim();
-                String password = inputPassword.getText().toString().trim();
+                final String email = inputEmail.getText().toString().trim();
+                final String password = inputPassword.getText().toString().trim();
+                final String name = inputName.getText().toString().trim();
 
                 if (TextUtils.isEmpty(email)) {
                     Toast.makeText(getApplicationContext(), "Enter email address!", Toast.LENGTH_SHORT).show();
@@ -78,6 +82,8 @@ public class registerActivity extends AppCompatActivity  {
                                     Toast.makeText(registerActivity.this, "Authentication failed." + task.getException(),
                                             Toast.LENGTH_SHORT).show();
                                 } else {
+
+                                    makeCustomer(name, email, password);
                                     startActivity(new Intent(registerActivity.this, MainActivity.class));
                                     finish();
                                 }
@@ -86,6 +92,17 @@ public class registerActivity extends AppCompatActivity  {
 
             }
         });
+
+
     }
+
+
+public  void makeCustomer(String name, String Email, String pw ){
+
+        this.customer.setName(name);
+        this.customer.setEmail(Email);
+        this.customer.setPW(pw);
+        this.customer.setID();
+}
 
 }
