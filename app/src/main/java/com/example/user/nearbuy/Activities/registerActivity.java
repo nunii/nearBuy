@@ -16,14 +16,21 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class registerActivity extends AppCompatActivity  {
 
     private EditText inputEmail, inputPassword, inputName;
     private Button btn_register;
-    //private ProgressBar progBar;
+    private FirebaseDatabase database;
     private FirebaseAuth auth;
     private Customer customer;
+    private static int idNum = 1;
+    private DatabaseReference mDatabase, newUser;
+    private FirebaseUser mCurrentUser;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +38,9 @@ public class registerActivity extends AppCompatActivity  {
         setContentView(R.layout.activity_register);
 
         auth = FirebaseAuth.getInstance();
+        database = FirebaseDatabase.getInstance();
+
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("Users");
 
         inputEmail = findViewById(R.id.text_email);
         inputPassword = findViewById(R.id.text_pw);
@@ -83,7 +93,13 @@ public class registerActivity extends AppCompatActivity  {
                                             Toast.LENGTH_SHORT).show();
                                 } else {
 
-                                    makeCustomer(name, email, password);
+                                    //makeCustomer(name, email);
+                                   // String userID = auth.getCurrentUser().getUid();
+                                    mCurrentUser= task.getResult().getUser();
+                                    newUser=mDatabase.child("user"+Integer.valueOf(idNum));
+                                    newUser.child("email").setValue(email);
+                                    newUser.child("name").setValue(name);
+                                    newUser.child("ID").setValue(idNum);
                                     startActivity(new Intent(registerActivity.this, MainActivity.class));
                                     finish();
                                 }
@@ -97,12 +113,13 @@ public class registerActivity extends AppCompatActivity  {
     }
 
 
-public  void makeCustomer(String name, String Email, String pw ){
-
+public  void makeCustomer(String name, String Email){
+        // need to delete PW from user
         this.customer.setName(name);
         this.customer.setEmail(Email);
-        this.customer.setPW(pw);
-        this.customer.setID();
+        //this.customer.setID();
 }
+
+
 
 }

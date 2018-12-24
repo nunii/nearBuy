@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
         et_pw = findViewById(R.id.in_pw);
         auth = FirebaseAuth.getInstance();
 
+
         if (auth.getCurrentUser() != null) {
             startActivity(new Intent(MainActivity.this, userActivity.class));
             finish();
