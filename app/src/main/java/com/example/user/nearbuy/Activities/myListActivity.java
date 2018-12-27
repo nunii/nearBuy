@@ -1,6 +1,7 @@
 package com.example.user.nearbuy.Activities;
 ///https://stackoverflow.com/questions/2250770/how-to-refresh-android-listview
 import android.app.ListActivity;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
@@ -42,37 +43,24 @@ public class myListActivity extends AppCompatActivity {
     //private String[] prods ={"hammer"};
     private int listITR = 0;
     ListView lv;
-    Button addItemBTN;
+    Button addItemBTN,mkList;
     Runnable run;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
 
-        /*run = new Runnable() {
-            public void run() {
-                //reload content
-                arraylist.clear();
-                arraylist.addAll(db.readAll());
-                adapter.notifyDataSetChanged();
-                listview.invalidateViews();
-                listview.refreshDrawableState();
-            }
-        };
-*/
+
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference().child("Stores");
         lv = findViewById(R.id.list_);
-        // have to initiate a FINAL Strings array...
-        //prods = new String[1];
-        //prods[0]="test";
         prodslist = new ArrayList<>();
         numItems=0;
 
+        mkList = (Button) findViewById(R.id.btn_mklist);
         addItemBTN = (Button) findViewById(R.id.btn_addItem);
 
         prodsAdptr = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, prodslist);
-        //prodslist.add("bdika");
         lv.setAdapter(prodsAdptr);
 
         citySpinner = findViewById(R.id.spinner_city);
@@ -91,20 +79,24 @@ public class myListActivity extends AppCompatActivity {
         productsAdptr.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
 
+        mkList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(myListActivity.this,Pop.class));
+            }
+        });
+
 
         citySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id)
             {
-                //position=0;
                 city = parentView.getSelectedItem().toString();
                 if(position!=0){
                     cityPos = position;
                     //Toast.makeText(getApplicationContext(), "city is: "+city, Toast.LENGTH_SHORT).show();
                 }
-                /*else{
-                    Toast.makeText(getApplicationContext(), "city is: "+city, Toast.LENGTH_SHORT).show();
-                }*/
+
             }
 
             public void onNothingSelected(AdapterView<?> parentView)

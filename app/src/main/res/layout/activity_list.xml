@@ -66,13 +66,31 @@
         android:layout_width="175dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="152dp"
+        android:layout_marginTop="182dp"
         android:layout_marginEnd="11dp"
         android:onClick="addItem"
         android:text="Add item to list"
+        app:layout_constraintBottom_toTopOf="@+id/list_"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/spinner_products"
         app:layout_constraintTop_toBottomOf="@+id/textView6" />
+
+    <Button
+        android:id="@+id/btn_mklist"
+        style="@android:style/Widget.DeviceDefault.Light.Button.Inset"
+        android:layout_width="175dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="105dp"
+        android:layout_marginTop="17dp"
+        android:layout_marginEnd="104dp"
+        android:layout_marginBottom="16dp"
+        android:onClick="addItem"
+        android:text="Make a list"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/list_" />
 
     <ListView
         android:id="@+id/list_"
@@ -85,6 +103,7 @@
         android:background="@color/colorAccent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_addItem" />
 
