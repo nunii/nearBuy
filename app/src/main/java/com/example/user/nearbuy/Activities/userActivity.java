@@ -13,7 +13,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class userActivity extends AppCompatActivity {
 
-    private Button logout;
+    private Button logout, makeList;
     private FirebaseAuth.AuthStateListener authListener;
     private FirebaseAuth auth;
 
@@ -23,9 +23,8 @@ public class userActivity extends AppCompatActivity {
         setContentView(R.layout.activity_user);
 
         logout = (Button) findViewById(R.id.btn_logout);
+        makeList = (Button) findViewById(R.id.button_makeList);
         auth = FirebaseAuth.getInstance();
-
-
 
         authListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -39,14 +38,6 @@ public class userActivity extends AppCompatActivity {
                 }
             }
         };
-
-        /*logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                signOut();
-            }
-        });*/
-
     }
 
     public void logoutBTN(View v){
@@ -57,7 +48,10 @@ public class userActivity extends AppCompatActivity {
             finish();
         }
     }
-   /* public void signOut() {
-        auth.signOut();
-    }*/
-}
+
+    public void makeListBTN(View v){
+        if(v.getId() == R.id.button_makeList){
+            startActivity(new Intent(userActivity.this, myListActivity.class));
+        }
+    }
+  }

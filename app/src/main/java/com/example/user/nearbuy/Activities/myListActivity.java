@@ -1,6 +1,6 @@
-/*
 package com.example.user.nearbuy.Activities;
-
+///https://stackoverflow.com/questions/2250770/how-to-refresh-android-listview
+import android.app.ListActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
@@ -8,6 +8,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -25,25 +27,53 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-public class ListActivity extends AppCompatActivity {
+public class myListActivity extends AppCompatActivity {
 
-    private int cityPos,categoryPos,productPos,itemPos;
-    private ArrayList<String> list;
+    private int cityPos,categoryPos,productPos,itemPos,sum,numItems;
+    private ArrayList<String> prodslist;
     private DatabaseReference mDatabase;
     private static Map<String,Integer> BURGERKING,ACE,RENUAR,ZARA = new HashMap<>();
     private String city,category,product;
     Spinner productsSpinner,citySpinner,categorySpinner;
     ArrayAdapter<CharSequence> categoryAdapter2,cityAdapter,productsAdptr;
+    ArrayAdapter<String> prodsAdptr;
     private RecyclerView itemsView;
-
+    private String[] prods;
+    //private String[] prods ={"hammer"};
+    private int listITR = 0;
+    ListView lv;
+    Button addItemBTN;
+    Runnable run;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
 
+        /*run = new Runnable() {
+            public void run() {
+                //reload content
+                arraylist.clear();
+                arraylist.addAll(db.readAll());
+                adapter.notifyDataSetChanged();
+                listview.invalidateViews();
+                listview.refreshDrawableState();
+            }
+        };
+*/
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference().child("Stores");
-        list = new ArrayList<>();
+        lv = findViewById(R.id.list_);
+        // have to initiate a FINAL Strings array...
+        //prods = new String[1];
+        //prods[0]="test";
+        prodslist = new ArrayList<>();
+        numItems=0;
+
+        addItemBTN = (Button) findViewById(R.id.btn_addItem);
+
+        prodsAdptr = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, prodslist);
+        //prodslist.add("bdika");
+        lv.setAdapter(prodsAdptr);
 
         citySpinner = findViewById(R.id.spinner_city);
         categorySpinner = findViewById(R.id.spinner_category);
@@ -61,6 +91,7 @@ public class ListActivity extends AppCompatActivity {
         productsAdptr.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
 
+
         citySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id)
@@ -71,11 +102,9 @@ public class ListActivity extends AppCompatActivity {
                     cityPos = position;
                     //Toast.makeText(getApplicationContext(), "city is: "+city, Toast.LENGTH_SHORT).show();
                 }
-                */
-/*else{
+                /*else{
                     Toast.makeText(getApplicationContext(), "city is: "+city, Toast.LENGTH_SHORT).show();
-                }*//*
-
+                }*/
             }
 
             public void onNothingSelected(AdapterView<?> parentView)
@@ -88,14 +117,13 @@ public class ListActivity extends AppCompatActivity {
 
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id)
             {
-                 category = parentView.getSelectedItem().toString();
+                category = parentView.getSelectedItem().toString();
                 if(position!=0){
                     categoryPos = position;
                     setItemSpinner();
                     //itemPos = productsSpinner.getSelectedItemPosition();
                     //Toast.makeText(getApplicationContext(), "category is: "+category, Toast.LENGTH_SHORT).show();
                 }
-
 
             }
 
@@ -167,6 +195,12 @@ public class ListActivity extends AppCompatActivity {
 
     public void addItem(View v){
 
+        prodslist.add(product);
+        numItems++;
+        prodsAdptr.notifyDataSetChanged();
+        Toast.makeText(getApplicationContext(), "item Added "+prodslist.get(prodslist.size()-1), Toast.LENGTH_SHORT).show();
+
+
     }
+
 }
-*/

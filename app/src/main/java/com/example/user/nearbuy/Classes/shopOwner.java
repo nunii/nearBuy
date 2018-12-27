@@ -19,10 +19,10 @@ public class shopOwner extends Customer {
         //addUserToDB(name,password);
     }
 
-    public void createShop(String shopName, String category) throws IOException{
+    /*public void createShop(String shopName, String category) throws IOException{
         Store t = new Store(shopName,category,this.name);
     }
-
+*/
 
 
 

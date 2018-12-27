@@ -22,10 +22,9 @@ public class Store implements mainStore {
     private Map<String, Integer> products = new HashMap<>();
 
 
-    public Store(String name, String category, String owner) throws IOException{
+    public Store(String name, String category) throws IOException{
         this.name=name;
         this.category=category;
-        this.owner=owner;
         ID+=1;
         //addStoreToDB(ID,name);
     }

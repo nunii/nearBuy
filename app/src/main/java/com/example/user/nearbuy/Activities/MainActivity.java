@@ -72,8 +72,6 @@ public class MainActivity extends AppCompatActivity {
                         .addOnCompleteListener(MainActivity.this, new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
-                                // If sign in fails, display a message to the user. If sign in succeeds
-                                // the auth state listener will be notified and logic to handle the
                                 // signed in user can be handled in the listener.
                                 if (!task.isSuccessful()) {
                                     // there was an error
@@ -91,52 +89,6 @@ public class MainActivity extends AppCompatActivity {
                         });
             }
         });
-
-
- /*       login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String email = et_email.getText().toString();
-                final String password = et_pw.getText().toString();
-                Toast.makeText(getApplicationContext(), "Enter email address!", Toast.LENGTH_SHORT).show();
-
-                if (TextUtils.isEmpty(email)) {
-                    Toast.makeText(getApplicationContext(), "Enter email address!", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                if (TextUtils.isEmpty(password)) {
-                    Toast.makeText(getApplicationContext(), "Enter password!", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-//                progressBar.setVisibility(View.VISIBLE);
-
-                //authenticate user
-                auth.signInWithEmailAndPassword(email, password)
-                        .addOnCompleteListener(MainActivity.this, new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                // If sign in fails, display a message to the user. If sign in succeeds
-                                // the auth state listener will be notified and logic to handle the
-                                // signed in user can be handled in the listener.
-//                                progressBar.setVisibility(View.GONE);
-                                if (!task.isSuccessful()) {
-                                    // there was an error
-                                    if (password.length() < 6) {
-                                        Toast.makeText(MainActivity.this, "Password too short!", Toast.LENGTH_LONG).show();
-                                    } else {
-                                        Toast.makeText(MainActivity.this, "Authentication failed!", Toast.LENGTH_LONG).show();
-                                    }
-                                } else {
-                                    Intent intent = new Intent(MainActivity.this, userActivity.class);
-                                    startActivity(intent);
-                                    finish();
-                                }
-                            }
-                        });
-            }
-        });*/
 
         }
 

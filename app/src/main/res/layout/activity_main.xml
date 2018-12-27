@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/holo_blue_light"
+    android:background="@color/cardview_shadow_end_color"
     tools:context=".Activities.MainActivity">
 
     <TextView
@@ -12,21 +12,23 @@
         android:layout_width="346dp"
         android:layout_height="46dp"
         android:layout_marginStart="19dp"
-        android:layout_marginTop="25dp"
         android:layout_marginEnd="19dp"
+        android:layout_marginBottom="3dp"
         android:text="Welcome to nearBuy"
         android:textSize="35sp"
-        app:layout_constraintBottom_toTopOf="@+id/in_mail"
+        app:layout_constraintBottom_toTopOf="@+id/imageView4"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.272" />
 
     <EditText
         android:id="@+id/in_mail"
         android:layout_width="308dp"
         android:layout_height="46dp"
         android:layout_marginStart="38dp"
-        android:layout_marginTop="81dp"
+        android:layout_marginTop="100dp"
         android:layout_marginEnd="38dp"
         android:layout_marginBottom="13dp"
         android:background="@android:color/background_light"
@@ -35,6 +37,7 @@
         android:inputType="textEmailAddress"
         app:layout_constraintBottom_toTopOf="@+id/in_pw"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
@@ -59,18 +62,19 @@
 
     <Button
         android:id="@+id/btn_login"
+        style="@android:style/Widget.Button.Inset"
         android:layout_width="253dp"
         android:layout_height="43dp"
-        android:layout_marginStart="67dp"
+        android:layout_marginStart="66dp"
         android:layout_marginTop="14dp"
-        android:layout_marginEnd="64dp"
+        android:layout_marginEnd="65dp"
         android:layout_marginBottom="77dp"
         android:text="Login"
         app:layout_constraintBottom_toTopOf="@+id/editText3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/in_pw"/>
-        <!--android:onClick="onClick"-->
+        app:layout_constraintTop_toBottomOf="@+id/in_pw" />
+    <!--android:onClick="onClick"-->
 
 
     <EditText
@@ -84,18 +88,18 @@
         android:inputType="textPersonName"
         android:text="Not a member yet?"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.857"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_login"
-       />
+        app:layout_constraintTop_toBottomOf="@+id/btn_login" />
 
     <Button
         android:id="@+id/btn_register"
+        style="@android:style/Widget.Button.Inset"
         android:layout_width="251dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
+        android:layout_marginStart="66dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="65dp"
         android:layout_marginBottom="8dp"
         android:text="Register"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -103,9 +107,26 @@
         app:layout_constraintHorizontal_bias="0.196"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText3"
-        app:layout_constraintVertical_bias="0.714"/>
-        <!--android:onClick="onClick"-->
+        app:layout_constraintVertical_bias="0.714" />
 
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="45dp"
+        app:layout_constraintBottom_toTopOf="@+id/in_mail"
+        app:layout_constraintEnd_toStartOf="@+id/textView"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.833"
+        app:srcCompat="@drawable/nearbuy" />
+
+    <!--android:onClick="onClick"-->
 
 
 </android.support.constraint.ConstraintLayout>

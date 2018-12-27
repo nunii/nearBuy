@@ -1,3 +1,49 @@
 <resources>
     <string name="app_name">nearBuy</string>
+    <string-array name="cities">
+        <item></item>
+        <item>Herzliya</item>
+        <item>Hod-Hasharon</item>
+        <item>Petah-Tiqwa</item>
+    </string-array>
+
+    <string-array name="empty_items">
+        <item></item>
+    </string-array>
+
+    <string-array name="hod_hasharon_items">
+        <item></item>
+        <item>T-shirt</item>
+        <item>dress</item>
+    </string-array>
+
+    <string-array name="herzilia_items">
+        <item></item>
+        <item>hammer</item>
+        <item>kitchen table</item>
+        <item>screwdriver</item>
+    </string-array>
+
+    <string-array name="petah_tiqwa_clothing_items">
+        <item></item>
+        <item>T-shirt</item>
+        <item>coat</item>
+        <item>dress</item>
+    </string-array>
+
+    <string-array name="petah_tiqwa_food_items">
+        <item></item>
+        <item>diet coke</item>
+        <item>fries</item>
+        <item>full meal</item>
+        <item>ice-cream</item>
+    </string-array>
+
+    <string-array name="categories">
+        <item></item>
+        <item>home &#38; garden</item>
+        <item>food</item>
+        <item>clothing</item>
+    </string-array>
+
 </resources>
