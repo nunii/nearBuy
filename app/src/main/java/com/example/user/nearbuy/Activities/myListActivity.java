@@ -36,7 +36,8 @@ public class myListActivity extends AppCompatActivity {
 
     private int cityPos,categoryPos,productPos,itemPos,sum,numItems;
     private ArrayList<Store> storesList;
-    private ArrayList<String> prodslist;
+    public static ArrayList<String> prodslist;
+    public static ArrayList<String> storesss;
     private DatabaseReference mRef;
     private String storeID;
     private static Map<String,Integer> BURGERKING,ACE,RENUAR,ZARA = new HashMap<>();
@@ -60,11 +61,8 @@ public class myListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_list);
 
         storesList = new ArrayList<>();
-        //mAuth = FirebaseAuth.getInstance();
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         mRef = FirebaseDatabase.getInstance().getReference().child("Stores");
-        //mRef.addListenerForSingleValueEvent(valueEventListener);
-        //Query query = mRef.equalTo("ACE");
 
        /* Query query = FirebaseDatabase.getInstance().getReference("Stores")
                 .orderByChild("Name")
@@ -104,6 +102,7 @@ public class myListActivity extends AppCompatActivity {
 
         lv = findViewById(R.id.list_);
         prodslist = new ArrayList<>();
+        storesss = new ArrayList<>();
         numItems=0;
 
         mkList = (Button) findViewById(R.id.btn_mklist);
@@ -260,6 +259,7 @@ public class myListActivity extends AppCompatActivity {
     public void addItem(View v){
 
         prodslist.add(product);
+        storesss.add(city);
         numItems++;
         prodsAdptr.notifyDataSetChanged();
         toastMsg("item Added "+prodslist.get(prodslist.size()-1));
