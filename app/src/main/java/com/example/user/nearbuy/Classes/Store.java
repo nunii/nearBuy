@@ -19,10 +19,10 @@ import java.util.Map;
 public class Store  {
 
     private String Category,Name,City;
-    ArrayList<String> Items;
+    HashMap<String,Integer> Items;
 
     public Store(){
-
+        Items = new HashMap<String,Integer>();
     }
 
     public String getCategory() {
@@ -37,6 +37,29 @@ public class Store  {
         return Name;
     }
 
+    public void addItem(String item, int val){
+        this.Items.put(item,val);
+    }
+
+    public HashMap<String, Integer> getItems() {
+        return Items;
+    }
+
+    public int getVal(String key){
+        return this.Items.get(key);
+    }
+
+    /*public String getItem(String name){
+       String ans ="";
+
+       for(String temp :this.Items){
+           if (temp.matches(name)){
+               ans = name;
+           }
+       }
+       return ans;
+    }*/
+
     public void setName(String name) {
         Name = name;
     }
@@ -48,14 +71,5 @@ public class Store  {
     public void setCity(String city) {
         City = city;
     }
-
-    public ArrayList<String> getItems() {
-        return Items;
-    }
-
-    public void setItems(ArrayList<String> items) {
-        Items = items;
-    }
-
 
 }

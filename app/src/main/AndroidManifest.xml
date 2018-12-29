@@ -18,11 +18,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activities.Pop"
-                  android:theme="@style/blabla" />
+        <activity
+            android:name=".Activities.Pop"
+            android:theme="@style/blabla" />
         <activity android:name=".Activities.registerActivity" />
         <activity android:name=".Activities.userActivity" />
-        <activity android:name=".Activities.myListActivity"></activity>
+        <activity android:name=".Activities.myListActivity" />
+        <activity android:name=".Activities.managerActivity" />
+        <activity android:name=".Activities.updatePriceActivity"></activity>
     </application>
 
 </manifest>

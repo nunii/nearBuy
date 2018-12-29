@@ -58,7 +58,8 @@ public class MainActivity extends AppCompatActivity {
 
                 final String email = et_email.getText().toString();
                 final String password = et_pw.getText().toString();
-
+                boolean manager = false;
+                if (email == "amit@gmail.com" && password == "qweqwe") manager = true;
                 if (TextUtils.isEmpty(email)) {
                     Toast.makeText(getApplicationContext(), "Enter email address!", Toast.LENGTH_SHORT).show();
                     return;
@@ -72,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
                         .addOnCompleteListener(MainActivity.this, new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
+
                                 // signed in user can be handled in the listener.
                                 if (!task.isSuccessful()) {
                                     // there was an error
@@ -81,9 +83,16 @@ public class MainActivity extends AppCompatActivity {
                                         Toast.makeText(MainActivity.this, "Authentication failed!", Toast.LENGTH_LONG).show();
                                     }
                                 } else {
-                                    Intent intent = new Intent(MainActivity.this, userActivity.class);
-                                    startActivity(intent);
-                                    finish();
+                                    String uid = auth.getCurrentUser().getUid();
+                                    if (uid.equals("zoFiePjI8sPqAZiDz0mFJTPzSFf2")) {
+                                        Intent intent = new Intent(MainActivity.this, managerActivity.class);
+                                        startActivity(intent);
+                                        finish();
+                                    } else {
+                                        Intent intent = new Intent(MainActivity.this, userActivity.class);
+                                        startActivity(intent);
+                                        finish();
+                                    }
                                 }
                             }
                         });

@@ -4,11 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/holo_orange_light"
+    android:background="@color/colorAccent"
     tools:context=".Activities.registerActivity">
 
     <Button
         android:id="@+id/btn_register2"
+        style="@android:style/Widget.Button.Inset"
         android:layout_width="257dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="61dp"
@@ -26,17 +27,16 @@
         android:layout_width="308dp"
         android:layout_height="46dp"
         android:layout_marginStart="38dp"
-        android:layout_marginTop="177dp"
         android:layout_marginEnd="38dp"
-        android:layout_marginBottom="37dp"
+        android:layout_marginBottom="16dp"
         android:background="@android:color/background_light"
         android:ems="10"
         android:inputType="textEmailAddress"
-        app:layout_constraintBottom_toTopOf="@+id/text_pw"
+        app:layout_constraintBottom_toTopOf="@+id/textView3"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
     <EditText
         android:id="@+id/text_nickname"
@@ -51,38 +51,41 @@
         android:inputType="textEmailAddress"
         app:layout_constraintBottom_toTopOf="@+id/btn_register2"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+        app:layout_constraintTop_toBottomOf="@+id/textView5"
+        app:layout_constraintVertical_bias="0.312" />
 
     <EditText
         android:id="@+id/text_pw"
         android:layout_width="308dp"
         android:layout_height="45dp"
         android:layout_marginStart="38dp"
+        android:layout_marginTop="15dp"
         android:layout_marginEnd="39dp"
-        android:layout_marginBottom="150dp"
+        android:layout_marginBottom="17dp"
         android:background="@android:color/background_light"
         android:ems="10"
         android:inputType="textPassword"
-        app:layout_constraintBottom_toTopOf="@+id/btn_register2"
+        app:layout_constraintBottom_toTopOf="@+id/textView5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_email"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="241dp"
-        android:layout_height="26dp"
+        android:layout_height="28dp"
         android:layout_marginStart="40dp"
-        android:layout_marginTop="144dp"
+        android:layout_marginTop="75dp"
         android:layout_marginEnd="103dp"
-        android:layout_marginBottom="7dp"
+        android:layout_marginBottom="16dp"
         android:text="Please write your email:"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/text_email"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -91,12 +94,14 @@
         android:layout_width="305dp"
         android:layout_height="26dp"
         android:layout_marginStart="40dp"
-        android:layout_marginTop="11dp"
+        android:layout_marginTop="15dp"
         android:layout_marginEnd="39dp"
+        android:layout_marginBottom="14dp"
         android:text="Please write your password:"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/text_pw"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_email" />
 
@@ -105,13 +110,14 @@
         android:layout_width="305dp"
         android:layout_height="26dp"
         android:layout_marginStart="40dp"
-        android:layout_marginTop="9dp"
+        android:layout_marginTop="17dp"
         android:layout_marginEnd="39dp"
-        android:layout_marginBottom="7dp"
-        android:text="choose your nickname:"
+        android:layout_marginBottom="17dp"
+        android:text="choose your name:"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/text_nickname"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_pw" />
 </android.support.constraint.ConstraintLayout>

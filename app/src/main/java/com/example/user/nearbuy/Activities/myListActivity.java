@@ -6,7 +6,7 @@ import android.nfc.Tag;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
+
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -38,9 +38,6 @@ public class myListActivity extends AppCompatActivity {
     private ArrayList<Store> storesList;
     private ArrayList<String> prodslist;
     private DatabaseReference mRef;
-    private FirebaseAuth mAuth;
-    private FirebaseAuth.AuthStateListener mAuthListener;
-    //private Firebase mRef;
     private String storeID;
     private static Map<String,Integer> BURGERKING,ACE,RENUAR,ZARA = new HashMap<>();
     private String city,category,product;
@@ -51,6 +48,9 @@ public class myListActivity extends AppCompatActivity {
     ListView lv;
     Button addItemBTN,mkList;
     Query mQuery;
+    private static ArrayList<Store> tList;
+    private static int minPrice;
+    private static String finalCity;
 
     String temp; // kill after.
 
@@ -76,26 +76,22 @@ public class myListActivity extends AppCompatActivity {
                 storesList.clear();
                 if (dataSnapshot.exists()) {
                     for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                        String key = "";
+                        int val = 0;
                         Store store = new Store();
-                        //Store.setName(ds.child("Name").getValue(Store.class).getName());
-                        //String sname = ds.child("Name").getValue(String.class);
                         store.setName(ds.child("Name").getValue(String.class));
                         store.setCity(ds.child("City").getValue(String.class));
                         store.setCategory(ds.child("Category").getValue(String.class));
-
-                        /*sInfo.setCategory(ds.child(userID).getValue(storeInformation.class).getCategory());
-                        sInfo.setCity(ds.child(userID).getValue(storeInformation.class).getCity());*/
-
+                        for (DataSnapshot item : ds.child("Items").getChildren()){
+                            key = item.getKey();
+                            val = item.getValue(Integer.class);
+                            store.addItem(key,val);
+                        }
                         storesList.add(store);
-                        //Artist artist = snapshot.getValue(Artist.class);
-                        //artistList.add(artist);
+                        //toastMsg(String.valueOf(storesList.get(0).getVal("hammer")));
                     }
                     //adapter.notifyDataSetChanged();
                 }
-                 //dataSnapshot.child("ACE").child("City").getValue(String.class);
-                temp = storesList.get(1).getName();
-                if (storesList.isEmpty()) temp = "empty";
-                toastMsg(temp);
             }
 
             @Override
@@ -106,47 +102,6 @@ public class myListActivity extends AppCompatActivity {
 
         mRef.addValueEventListener(vEventListener);
 
-
-  /*      mRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String temp = dataSnapshot.child("ACE").child("City").getValue(String.class);
-                toastMsg(temp);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });*/
-
-       /* FirebaseUser user = mAuth.getCurrentUser();*/
-        //storeID = mDatabase.child("ACE").toString();
-        //storeID = mDatabase.child("City").toString();
-        //ds = mDatabase.child("City");
-        //toastMsg(storeID);
-
-        /*userID = user.get;
-        toastMsg(userID);*/
-
-        /*mAuthListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser user = firebaseAuth.getCurrentUser();
-                if (user != null) {
-                    // User is signed in
-                    Log.d("test", "onAuthStateChanged:signed_in:" + user.getUid());
-                    toastMsg("Successfully signed in with: " + user.getEmail());
-                } else {
-                    // User is signed out
-                    Log.d("test", "onAuthStateChanged:signed_out");
-                    toastMsg("Successfully signed out.");
-                }
-                // ...
-            }
-        };*/
-
-        //mAuth.addAuthStateListener(mAuthListener);
         lv = findViewById(R.id.list_);
         prodslist = new ArrayList<>();
         numItems=0;
@@ -179,6 +134,7 @@ public class myListActivity extends AppCompatActivity {
                 //creating the querry.
                 //setQuerry(city,category,product);
                 // need to create a global string which will be used on that popup.
+                makeList();
                 startActivity(new Intent(myListActivity.this,Pop.class));
                 // should add progress bar on that activity.
 
@@ -238,33 +194,27 @@ public class myListActivity extends AppCompatActivity {
                 //return;
             }
         });
+    }
 
-       /* mRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                *//*for(DataSnapshot data: dataSnapshot.getChildren()){
-                    // use array1.add to store value in your arrayList
-                    toastMsg(dataSnapshot.child("City").getValue(String.class));
-
-                }*//*
-               *//* String temp = dataSnapshot.child("RENUAR").child("City").getValue(String.class);
-                if(temp == "Herzlia") {
-                    toastMsg(temp);
-                }
-                else toastMsg("not herzlia!!!!!!!!");*//*
-               //toastMsg(dataSnapshot.child("ACE").child("Items").child("hammer").getValue(String.class));
-                *//*int temp = dataSnapshot.child("ACE").child("Items").child("hammer").getValue(Integer.class);
-                toastMsg(String.valueOf(temp));*//*
-                for(DataSnapshot ds : dataSnapshot.getChildren()){
-
-                }
+    private void makeList() {
+        minPrice = 100000;
+        tList = new ArrayList<>();
+        for(Store st : storesList){
+            if(st.getCity()==city){
+                tList.add(st);
             }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
+        }
+        for(Store st: tList){
+            if(!st.getItems().containsKey(product)){
+                tList.remove(st);
             }
-        });*/
+        }
+        for(Store st: tList){
+            if(st.getItems().get(product)<minPrice){
+                minPrice = st.getItems().get(product);
+                finalCity = st.getCity();
+            }
+        }
     }
 
    /* private void setQuerry(String city, String category, String product) {
@@ -314,31 +264,6 @@ public class myListActivity extends AppCompatActivity {
         prodsAdptr.notifyDataSetChanged();
         toastMsg("item Added "+prodslist.get(prodslist.size()-1));
     }
-
-/*    private void showData(DataSnapshot DataSnapshot){
-        for(DataSnapshot ds : DataSnapshot.getChildren()){
-            storeInformation sInfo = new storeInformation();
-            sInfo.setName(ds.child(userID).getValue(storeInformation.class).getName());
-            sInfo.setCategory(ds.child(userID).getValue(storeInformation.class).getCategory());
-            sInfo.setCity(ds.child(userID).getValue(storeInformation.class).getCity());
-            //sInfo.setItems(ds.child(userID).getValue(storeInformation.class).getItems());
-            // need to figure out how to enter the data into a hashmap
-            Log.d("test", "showData: city"+sInfo.getCity());
-            Log.d("test", "showData: category"+sInfo.getCategory());
-            Log.d("test", "showData: name"+sInfo.getName());
-
-            ArrayList<String> array = new ArrayList<>();
-            array.add(sInfo.getCity());
-            array.add(sInfo.getName());
-            array.add(sInfo.getCategory());
-        }
-    }*/
-
-   /* @Override
-    public void onStart(){
-        super.onStart();
-        mAuth.addAuthStateListener(mAuthListener);
-    }*/
 
     private void toastMsg(String msg){
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
