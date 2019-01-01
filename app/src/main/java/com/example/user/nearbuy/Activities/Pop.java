@@ -9,6 +9,7 @@ import android.util.DisplayMetrics;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.Toast;
 
 import com.example.user.nearbuy.R;
 
@@ -41,7 +42,7 @@ public class Pop extends Activity {
 
 
         itemByShop = new HashMap<>();
-        itemByShop.put("Diana", "3214 Broadway Avenue");
+        //itemByShop.put("Diana", "3214 Broadway Avenue");
 /*        itemByShop.put("Tyga", "343 Rack City Drive");
         itemByShop.put("Rich Homie Quan", "111 Everything Gold Way");
         itemByShop.put("Donna", "789 Escort St");
@@ -72,8 +73,17 @@ public class Pop extends Activity {
     public void setItems(){
         //Iterator itr = myListActivity.prodslist.iterator();
         //int counter = 0;
-        for(int i=0;i<myListActivity.prodslist.size();i++){
-            itemByShop.put(myListActivity.prodslist.get(i), myListActivity.storesss.get(i));
+        if(myListActivity.prodslist.size() == myListActivity.storesss.size()){
+            for (int i = 0; i < myListActivity.prodslist.size(); i++) {
+                itemByShop.put(myListActivity.prodslist.get(i), "chippest store is: " + myListActivity.storesss.get(i));
+            }
         }
+        else{
+            toastMsg("lists are not equal.");
+        }
+    }
+
+    private void toastMsg(String msg){
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
 }

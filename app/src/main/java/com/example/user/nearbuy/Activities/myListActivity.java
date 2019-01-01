@@ -3,6 +3,7 @@ package com.example.user.nearbuy.Activities;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.nfc.Tag;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,7 +14,9 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.user.nearbuy.Classes.Store;
@@ -52,43 +55,59 @@ public class myListActivity extends AppCompatActivity {
     private static ArrayList<Store> tList;
     private static int minPrice;
     private static String finalCity;
-
+    public static String chippest_store;
     String temp; // kill after.
+    private ValueEventListener vEventListener;
+    private ProgressBar mProgressBar;
+    private int mProgressStatus = 0;
+    private TextView mLoadingText;
+    private Handler mHandler = new Handler();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
 
+        mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
+        mLoadingText = (TextView) findViewById(R.id.loadingText);
         storesList = new ArrayList<>();
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         mRef = FirebaseDatabase.getInstance().getReference().child("Stores");
 
+        chippest_store = "";
        /* Query query = FirebaseDatabase.getInstance().getReference("Stores")
                 .orderByChild("Name")
                 .equalTo("ACE");*/
 
-        ValueEventListener vEventListener = new ValueEventListener() {
+         vEventListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 storesList.clear();
+                storesss.clear();
+                minPrice = 100000;
                 if (dataSnapshot.exists()) {
-                    for (DataSnapshot ds : dataSnapshot.getChildren()) {
-                        String key = "";
-                        int val = 0;
-                        Store store = new Store();
-                        store.setName(ds.child("Name").getValue(String.class));
-                        store.setCity(ds.child("City").getValue(String.class));
-                        store.setCategory(ds.child("Category").getValue(String.class));
-                        for (DataSnapshot item : ds.child("Items").getChildren()){
-                            key = item.getKey();
-                            val = item.getValue(Integer.class);
-                            store.addItem(key,val);
+                    for(String prod : prodslist) {
+                        minPrice = 100000;
+                        for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                        /*Query query = FirebaseDatabase.getInstance().getReference("Stores")
+                                .orderByChild("Name")
+                                .equalTo("ACE");*/
+
+                            for (DataSnapshot item : ds.child("Items").getChildren()) {
+                                if (item.getKey().equals(prod)) {
+                                    //toastMsg(String.valueOf("equals"));
+                                    if (item.getValue(Integer.class) < minPrice) {
+                                        minPrice = item.getValue(Integer.class);
+                                        chippest_store = ds.child("Name").getValue(String.class);
+                                    }
+                                }
+                            }
                         }
-                        storesList.add(store);
-                        //toastMsg(String.valueOf(storesList.get(0).getVal("hammer")));
+                        storesss.add(chippest_store);
+                        //toastMsg("store added");
+
                     }
-                    //adapter.notifyDataSetChanged();
                 }
             }
 
@@ -97,8 +116,6 @@ public class myListActivity extends AppCompatActivity {
 
             }
         };
-
-        mRef.addValueEventListener(vEventListener);
 
         lv = findViewById(R.id.list_);
         prodslist = new ArrayList<>();
@@ -130,13 +147,31 @@ public class myListActivity extends AppCompatActivity {
         mkList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //creating the querry.
-                //setQuerry(city,category,product);
-                // need to create a global string which will be used on that popup.
-                makeList();
-                startActivity(new Intent(myListActivity.this,Pop.class));
-                // should add progress bar on that activity.
-
+                mRef.addValueEventListener(vEventListener);
+                mProgressBar.setVisibility(View.VISIBLE);
+                mLoadingText.setVisibility(View.VISIBLE);
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        while (mProgressStatus < 100){
+                            mProgressStatus++;
+                            android.os.SystemClock.sleep(50);
+                            mHandler.post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    mProgressBar.setProgress(mProgressStatus);
+                                }
+                            });
+                        }
+                        mHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                startActivity(new Intent(myListActivity.this,Pop.class));
+                                mLoadingText.setVisibility(View.INVISIBLE);
+                            }
+                        });
+                    }
+                }).start();
             }
         });
 
@@ -172,7 +207,6 @@ public class myListActivity extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> parentView)
             {
                 city = "";
-                //return;
             }
         });
 
@@ -190,40 +224,14 @@ public class myListActivity extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> parentView)
             {
                 city = "";
-                //return;
             }
         });
+
     }
-
-    private void makeList() {
-        minPrice = 100000;
-        tList = new ArrayList<>();
-        for(Store st : storesList){
-            if(st.getCity()==city){
-                tList.add(st);
-            }
-        }
-        for(Store st: tList){
-            if(!st.getItems().containsKey(product)){
-                tList.remove(st);
-            }
-        }
-        for(Store st: tList){
-            if(st.getItems().get(product)<minPrice){
-                minPrice = st.getItems().get(product);
-                finalCity = st.getCity();
-            }
-        }
-    }
-
-   /* private void setQuerry(String city, String category, String product) {
-
-    }*/
-
 
     public void setItemSpinner(){
         if(cityPos == 1 && categoryPos == 1){
-            productsAdptr = ArrayAdapter.createFromResource(this,R.array.herzilia_items, android.R.layout.simple_spinner_item);
+            productsAdptr = ArrayAdapter.createFromResource(this,R.array.herzliya_items, android.R.layout.simple_spinner_item);
             productsSpinner.setAdapter(productsAdptr);
             productsAdptr.notifyDataSetChanged();
         }
@@ -257,12 +265,10 @@ public class myListActivity extends AppCompatActivity {
     }
 
     public void addItem(View v){
-
         prodslist.add(product);
-        storesss.add(city);
+        //storesss.add(city);
         numItems++;
         prodsAdptr.notifyDataSetChanged();
-        toastMsg("item Added "+prodslist.get(prodslist.size()-1));
     }
 
     private void toastMsg(String msg){
