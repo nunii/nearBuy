@@ -10,6 +10,7 @@ import android.widget.Button;
 import com.example.user.nearbuy.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 public class userActivity extends AppCompatActivity {
 
@@ -21,10 +22,12 @@ public class userActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
+        FirebaseMessaging.getInstance().subscribeToTopic("nearBuy");
 
         logout = (Button) findViewById(R.id.btn_logoutManager);
         makeList = (Button) findViewById(R.id.button_makeListManager);
         auth = FirebaseAuth.getInstance();
+
 
         authListener = new FirebaseAuth.AuthStateListener() {
             @Override

@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">nearBuy</string>
+    <string name="default_notification_channel">com.example.user.nearbuy.default_notification_channel_id</string>
     <string-array name="cities">
         <item></item>
         <item>Herzliya</item>

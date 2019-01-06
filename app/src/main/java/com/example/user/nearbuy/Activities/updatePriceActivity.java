@@ -69,6 +69,11 @@ public class updatePriceActivity extends AppCompatActivity {
         }
     }
 
+    public void make_sale(View v){
+        if(v.getId() == R.id.btn_sale){
+            startActivity(new Intent(updatePriceActivity.this, saleActivity.class));
+        }
+    }
     private void toastMsg(String msg){
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }

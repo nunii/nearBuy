@@ -25,7 +25,8 @@
         <activity android:name=".Activities.userActivity" />
         <activity android:name=".Activities.myListActivity" />
         <activity android:name=".Activities.managerActivity" />
-        <activity android:name=".Activities.updatePriceActivity"></activity>
+        <activity android:name=".Activities.updatePriceActivity" />
+        <activity android:name=".Activities.saleActivity"></activity>
     </application>
 
 </manifest>
