@@ -101,7 +101,7 @@ public class registerActivity extends AppCompatActivity  {
                                     newUser.child("email").setValue(email);
                                     newUser.child("name").setValue(name);
                                     newUser.child("ID").setValue(idNum);
-                                    //FirebaseMessaging.getInstance().subscribeToTopic("nearBuy");
+                                    FirebaseMessaging.getInstance().subscribeToTopic("nearBuy");
                                     startActivity(new Intent(registerActivity.this, MainActivity.class));
                                     finish();
                                 }

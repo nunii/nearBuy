@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorAccent"
+    tools:context=".Activities.notifActivity">
+
+    <TextView
+        android:id="@+id/textViewNotTitle"
+        android:layout_width="107dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="47dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="230dp"
+        android:text="Title:"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/text_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewNotTitle2"
+        android:layout_width="107dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="47dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="230dp"
+        android:text="Message:"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/text_msg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_title" />
+
+    <Button
+        android:id="@+id/button_publish"
+        style="@android:style/Widget.Button.Inset"
+        android:layout_width="187dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="105dp"
+        android:layout_marginEnd="85dp"
+        android:layout_marginBottom="44dp"
+        android:text="Publish"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_msg" />
+
+    <EditText
+        android:id="@+id/text_title"
+        android:layout_width="308dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="47dp"
+        android:layout_marginTop="19dp"
+        android:layout_marginEnd="29dp"
+        android:layout_marginBottom="61dp"
+        android:background="@android:color/background_light"
+        android:ems="10"
+        android:inputType="textEmailAddress"
+        app:layout_constraintBottom_toTopOf="@+id/textViewNotTitle2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewNotTitle" />
+
+    <EditText
+        android:id="@+id/text_msg"
+        android:layout_width="308dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="47dp"
+        android:layout_marginTop="19dp"
+        android:layout_marginEnd="29dp"
+        android:layout_marginBottom="76dp"
+        android:background="@android:color/background_light"
+        android:ems="10"
+        android:inputType="textEmailAddress"
+        app:layout_constraintBottom_toTopOf="@+id/button_publish"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewNotTitle2" />
+</android.support.constraint.ConstraintLayout>

@@ -22,7 +22,7 @@ public class userActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
-        FirebaseMessaging.getInstance().subscribeToTopic("nearBuy");
+        //FirebaseMessaging.getInstance().subscribeToTopic("nearBuy");
 
         logout = (Button) findViewById(R.id.btn_logoutManager);
         makeList = (Button) findViewById(R.id.button_makeListManager);
@@ -58,6 +58,5 @@ public class userActivity extends AppCompatActivity {
         }
     }
   }
-
 
 

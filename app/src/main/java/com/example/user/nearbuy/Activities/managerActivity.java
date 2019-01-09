@@ -49,6 +49,12 @@ public class managerActivity extends AppCompatActivity {
         }
     }
 
+    public void notif(View v){
+        if(v.getId() == R.id.button_notif){
+            startActivity(new Intent(managerActivity.this, notifActivity.class));
+        }
+    }
+
     public void makeListBTN(View v){
         if(v.getId() == R.id.button_makeListManager){
             startActivity(new Intent(managerActivity.this, myListActivity.class));

@@ -1,5 +1,5 @@
-package com.example.user.nearbuy.Activities;
 
+package com.example.user.nearbuy.Activities;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -44,6 +44,7 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
 
     @Override
     public void onDeletedMessages() {
+
     }
 
     private void sendNotification(String title,String messageBody) {
@@ -53,8 +54,7 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
                 PendingIntent.FLAG_ONE_SHOT);
 
         Uri defaultSoundUri= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this,
-                getString(R.string.default_notification_channel))
+        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setContentTitle(title)
                 .setContentText(messageBody)

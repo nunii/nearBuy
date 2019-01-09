@@ -19,6 +19,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.user.nearbuy.Classes.Product;
 import com.example.user.nearbuy.Classes.Store;
 import com.example.user.nearbuy.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -41,9 +42,9 @@ public class myListActivity extends AppCompatActivity {
     private ArrayList<Store> storesList;
     public static ArrayList<String> prodslist;
     public static ArrayList<String> storesss;
+    public static Map<String, Integer> prices1 = new HashMap<>();
     private DatabaseReference mRef;
     private String storeID;
-    private static Map<String,Integer> BURGERKING,ACE,RENUAR,ZARA = new HashMap<>();
     private String city,category,product;
     private DataSnapshot ds;
     Spinner productsSpinner,citySpinner,categorySpinner;
@@ -51,17 +52,16 @@ public class myListActivity extends AppCompatActivity {
     ArrayAdapter<String> prodsAdptr;
     ListView lv;
     Button addItemBTN,mkList;
-    Query mQuery;
     private static ArrayList<Store> tList;
     private static int minPrice;
     private static String finalCity;
     public static String chippest_store;
-    String temp; // kill after.
     private ValueEventListener vEventListener;
     private ProgressBar mProgressBar;
     private int mProgressStatus = 0;
     private TextView mLoadingText;
     private Handler mHandler = new Handler();
+    public static ArrayList<Product> ListOfProds;
 
 
     @Override
@@ -74,7 +74,7 @@ public class myListActivity extends AppCompatActivity {
         storesList = new ArrayList<>();
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         mRef = FirebaseDatabase.getInstance().getReference().child("Stores");
-
+        ListOfProds = new ArrayList<>();
         chippest_store = "";
        /* Query query = FirebaseDatabase.getInstance().getReference("Stores")
                 .orderByChild("Name")
@@ -83,20 +83,13 @@ public class myListActivity extends AppCompatActivity {
          vEventListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                storesList.clear();
-                storesss.clear();
                 minPrice = 100000;
                 if (dataSnapshot.exists()) {
-                    for(String prod : prodslist) {
+                    for(int i = 0; i<ListOfProds.size();i++) {
                         minPrice = 100000;
                         for (DataSnapshot ds : dataSnapshot.getChildren()) {
-                        /*Query query = FirebaseDatabase.getInstance().getReference("Stores")
-                                .orderByChild("Name")
-                                .equalTo("ACE");*/
-
                             for (DataSnapshot item : ds.child("Items").getChildren()) {
-                                if (item.getKey().equals(prod)) {
-                                    //toastMsg(String.valueOf("equals"));
+                                if (item.getKey().equals(ListOfProds.get(i).getItem())) {
                                     if (item.getValue(Integer.class) < minPrice) {
                                         minPrice = item.getValue(Integer.class);
                                         chippest_store = ds.child("Name").getValue(String.class);
@@ -104,9 +97,8 @@ public class myListActivity extends AppCompatActivity {
                                 }
                             }
                         }
-                        storesss.add(chippest_store);
-                        //toastMsg("store added");
-
+                        ListOfProds.get(i).setPrice(String.valueOf(minPrice));
+                        ListOfProds.get(i).setStore(chippest_store);
                     }
                 }
             }
@@ -217,7 +209,7 @@ public class myListActivity extends AppCompatActivity {
                 product = parentView.getSelectedItem().toString();
                 if(position!=0){
                     product = parentView.getSelectedItem().toString();
-                    toastMsg("item is: "+product);
+                    //toastMsg("item is: "+product);
                 }
             }
 
@@ -266,12 +258,15 @@ public class myListActivity extends AppCompatActivity {
 
     public void addItem(View v){
         prodslist.add(product);
-        //storesss.add(city);
+        Product p = new Product();
+        p.setItem(product);
+
+        ListOfProds.add(p);
         numItems++;
         prodsAdptr.notifyDataSetChanged();
     }
 
     private void toastMsg(String msg){
-        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
     }
 }

@@ -3,6 +3,7 @@
     package="com.example.user.nearbuy">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
 
     <application
         android:allowBackup="true"
@@ -11,6 +12,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        android:name="com.google.firebase.messaging.default_notification_icon"
+        android:resource="@mipmap/ic_launcher" />
+        <service android:name=".Activities.FMC">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+        <service android:name=".Activities.MyFirebaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
         <activity android:name=".Activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,7 +40,8 @@
         <activity android:name=".Activities.myListActivity" />
         <activity android:name=".Activities.managerActivity" />
         <activity android:name=".Activities.updatePriceActivity" />
-        <activity android:name=".Activities.saleActivity"></activity>
+        <activity android:name=".Activities.saleActivity" />
+        <activity android:name=".Activities.notifActivity"></activity>
     </application>
 
 </manifest>
