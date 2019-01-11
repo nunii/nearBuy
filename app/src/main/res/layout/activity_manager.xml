@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorAccent"
-    tools:context=".Activities.managerActivity">
+    tools:context=".Activities.managerActivity"
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/textView4"
@@ -14,14 +15,11 @@
         android:layout_marginStart="23dp"
         android:layout_marginTop="36dp"
         android:layout_marginEnd="22dp"
-        android:layout_marginBottom="80dp"
+        android:layout_marginBottom="50dp"
         android:background="@android:color/transparent"
         android:text="Hi! what would you like to do?"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/button_makeListManager"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textSize="24sp"/>
+
 
     <Button
         android:id="@+id/button_makeListManager"
@@ -31,12 +29,7 @@
         android:layout_marginStart="78dp"
         android:layout_marginEnd="63dp"
         android:onClick="makeListBTN"
-        android:text="Make a shoping list"
-        app:layout_constraintBottom_toTopOf="@+id/button_updatePrice"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+        android:text="Make a shoping list" />
 
     <Button
         android:id="@+id/button_updatePrice"
@@ -47,12 +40,7 @@
         android:layout_marginTop="28dp"
         android:layout_marginEnd="63dp"
         android:text="updatePrice"
-        android:onClick="updatePrice"
-        app:layout_constraintBottom_toTopOf="@+id/button_addStore"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_makeListManager" />
+        android:onClick="updatePrice" />
 
     <Button
         android:id="@+id/button_addStore"
@@ -62,12 +50,7 @@
         android:layout_marginStart="78dp"
         android:layout_marginTop="28dp"
         android:layout_marginEnd="63dp"
-        android:text="Add a Store"
-        app:layout_constraintBottom_toTopOf="@+id/button_notif"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_updatePrice" />
+        android:text="Add a Store"/>
 
     <Button
         android:id="@+id/button_notif"
@@ -78,11 +61,7 @@
         android:layout_marginTop="28dp"
         android:layout_marginEnd="63dp"
         android:onClick="notif"
-        android:text="Notification publish"
-        app:layout_constraintBottom_toTopOf="@+id/btn_logoutManager"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_addStore" />
+        android:text="Notification publish"/>
 
     <Button
         android:id="@+id/btn_logoutManager"
@@ -94,11 +73,6 @@
         android:layout_marginEnd="63dp"
         android:layout_marginBottom="4dp"
         android:onClick="logoutBTN"
-        android:text="logout"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_notif" />
+        android:text="logout"/>
 
-</android.support.constraint.ConstraintLayout>
+</LinearLayout>
